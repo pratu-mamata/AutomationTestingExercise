@@ -12,7 +12,7 @@ class LoginPage {
         cy.get("button[type='submit']").click();
     }
 
-    loginWithValidCredential(username, password){
+    loginWithCredential(username, password){
         this.filluserName(username);
         this.fillPassword(password);
         this.loginBtnClick();
@@ -21,6 +21,11 @@ class LoginPage {
     getMessage() {
         return cy.get('#flash-messages div').invoke('text')
         .then(text => text.replace('×', '').trim());
+    }
+
+    verifyErrorMessageVisibility() {
+        cy.get('#flash').should('be.visible');
+        cy.get('#flash').should('have.class', 'error');
     }
 
 }
